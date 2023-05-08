@@ -1,4 +1,4 @@
-namespace _11939_Major_Agmnt_
+namespace LibraryCMS
 {
     internal static class Program
     {

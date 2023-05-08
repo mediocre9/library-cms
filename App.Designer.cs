@@ -1,4 +1,4 @@
-﻿namespace _11939_Major_Agmnt_
+﻿namespace LibraryCMS
 {
     partial class App
     {
@@ -35,6 +35,7 @@
             showPublishersToolStripMenuItem = new ToolStripMenuItem();
             authorsMenuItem = new ToolStripMenuItem();
             allMembersToolStripMenuItem = new ToolStripMenuItem();
+            allExpiredBooksToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem1 = new ToolStripMenuItem();
             groupBox1 = new GroupBox();
@@ -135,7 +136,7 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = SystemColors.MenuBar;
+            menuStrip1.BackColor = SystemColors.ControlLight;
             menuStrip1.Items.AddRange(new ToolStripItem[] { showToolStripMenuItem, aboutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -145,7 +146,7 @@
             // 
             // showToolStripMenuItem
             // 
-            showToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { showMembersToolStripMenuItem, showAllBooksToolStripMenuItem, showPublishersToolStripMenuItem, authorsMenuItem, allMembersToolStripMenuItem });
+            showToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { showMembersToolStripMenuItem, showAllBooksToolStripMenuItem, showPublishersToolStripMenuItem, authorsMenuItem, allMembersToolStripMenuItem, allExpiredBooksToolStripMenuItem });
             showToolStripMenuItem.Name = "showToolStripMenuItem";
             showToolStripMenuItem.Size = new Size(48, 20);
             showToolStripMenuItem.Text = "Show";
@@ -153,37 +154,44 @@
             // showMembersToolStripMenuItem
             // 
             showMembersToolStripMenuItem.Name = "showMembersToolStripMenuItem";
-            showMembersToolStripMenuItem.Size = new Size(159, 22);
+            showMembersToolStripMenuItem.Size = new Size(164, 22);
             showMembersToolStripMenuItem.Text = "All Issued Books";
             showMembersToolStripMenuItem.Click += showMembersToolStripMenuItem_Click;
             // 
             // showAllBooksToolStripMenuItem
             // 
             showAllBooksToolStripMenuItem.Name = "showAllBooksToolStripMenuItem";
-            showAllBooksToolStripMenuItem.Size = new Size(159, 22);
+            showAllBooksToolStripMenuItem.Size = new Size(164, 22);
             showAllBooksToolStripMenuItem.Text = "All Books";
             showAllBooksToolStripMenuItem.Click += showAllBooksToolStripMenuItem_Click;
             // 
             // showPublishersToolStripMenuItem
             // 
             showPublishersToolStripMenuItem.Name = "showPublishersToolStripMenuItem";
-            showPublishersToolStripMenuItem.Size = new Size(159, 22);
+            showPublishersToolStripMenuItem.Size = new Size(164, 22);
             showPublishersToolStripMenuItem.Text = "All Publishers";
             showPublishersToolStripMenuItem.Click += showPublishersToolStripMenuItem_Click;
             // 
             // authorsMenuItem
             // 
             authorsMenuItem.Name = "authorsMenuItem";
-            authorsMenuItem.Size = new Size(159, 22);
+            authorsMenuItem.Size = new Size(164, 22);
             authorsMenuItem.Text = "All Authors";
             authorsMenuItem.Click += authorsMenuItem_Click;
             // 
             // allMembersToolStripMenuItem
             // 
             allMembersToolStripMenuItem.Name = "allMembersToolStripMenuItem";
-            allMembersToolStripMenuItem.Size = new Size(159, 22);
+            allMembersToolStripMenuItem.Size = new Size(164, 22);
             allMembersToolStripMenuItem.Text = "All Members";
             allMembersToolStripMenuItem.Click += allMembersToolStripMenuItem_Click;
+            // 
+            // allExpiredBooksToolStripMenuItem
+            // 
+            allExpiredBooksToolStripMenuItem.Name = "allExpiredBooksToolStripMenuItem";
+            allExpiredBooksToolStripMenuItem.Size = new Size(164, 22);
+            allExpiredBooksToolStripMenuItem.Text = "All Expired Books";
+            allExpiredBooksToolStripMenuItem.Click += allExpiredBooksToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
             // 
@@ -191,11 +199,12 @@
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new Size(52, 20);
             aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem1
             // 
             aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            aboutToolStripMenuItem1.Size = new Size(107, 22);
+            aboutToolStripMenuItem1.Size = new Size(180, 22);
             aboutToolStripMenuItem1.Text = "About";
             aboutToolStripMenuItem1.Click += aboutToolStripMenuItem1_Click;
             // 
@@ -316,8 +325,10 @@
             dataGridView.Location = new Point(3, 3);
             dataGridView.Name = "dataGridView";
             dataGridView.RowTemplate.Height = 25;
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView.Size = new Size(524, 469);
             dataGridView.TabIndex = 2;
+            dataGridView.DoubleClick += OnDoubleClickRemoveData;
             // 
             // groupBox3
             // 
@@ -533,7 +544,7 @@
             // groupBox16
             // 
             groupBox16.Controls.Add(button3);
-            groupBox16.Location = new Point(7, 200);
+            groupBox16.Location = new Point(6, 287);
             groupBox16.Name = "groupBox16";
             groupBox16.Size = new Size(285, 60);
             groupBox16.TabIndex = 4;
@@ -563,7 +574,7 @@
             groupBox17.ForeColor = SystemColors.ControlText;
             groupBox17.Location = new Point(7, 3);
             groupBox17.Name = "groupBox17";
-            groupBox17.Size = new Size(284, 191);
+            groupBox17.Size = new Size(284, 278);
             groupBox17.TabIndex = 3;
             groupBox17.TabStop = false;
             groupBox17.Text = "Personal Info";
@@ -581,16 +592,16 @@
             // 
             bookPublisherField.FormattingEnabled = true;
             bookPublisherField.ItemHeight = 15;
-            bookPublisherField.Location = new Point(95, 140);
+            bookPublisherField.Location = new Point(95, 182);
             bookPublisherField.Name = "bookPublisherField";
-            bookPublisherField.Size = new Size(179, 34);
+            bookPublisherField.Size = new Size(179, 79);
             bookPublisherField.TabIndex = 17;
             bookPublisherField.SelectedIndexChanged += bookPublisherField_SelectedIndexChanged;
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(14, 140);
+            label17.Location = new Point(14, 182);
             label17.Name = "label17";
             label17.Size = new Size(75, 15);
             label17.TabIndex = 16;
@@ -602,7 +613,7 @@
             bookAuthorField.ItemHeight = 15;
             bookAuthorField.Location = new Point(95, 92);
             bookAuthorField.Name = "bookAuthorField";
-            bookAuthorField.Size = new Size(179, 34);
+            bookAuthorField.Size = new Size(179, 79);
             bookAuthorField.TabIndex = 13;
             bookAuthorField.SelectedIndexChanged += bookAuthorField_SelectedIndexChanged;
             // 
@@ -811,11 +822,12 @@
             tabPage5.Size = new Size(301, 357);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Issue Book";
+            tabPage5.Click += click_TabPage5;
             // 
             // groupBox20
             // 
             groupBox20.Controls.Add(button5);
-            groupBox20.Location = new Point(6, 165);
+            groupBox20.Location = new Point(6, 291);
             groupBox20.Name = "groupBox20";
             groupBox20.Size = new Size(285, 60);
             groupBox20.TabIndex = 5;
@@ -842,7 +854,7 @@
             groupBox21.Controls.Add(label15);
             groupBox21.Location = new Point(6, 6);
             groupBox21.Name = "groupBox21";
-            groupBox21.Size = new Size(285, 153);
+            groupBox21.Size = new Size(285, 279);
             groupBox21.TabIndex = 4;
             groupBox21.TabStop = false;
             groupBox21.Text = "Info";
@@ -853,14 +865,14 @@
             listBox3.ItemHeight = 15;
             listBox3.Location = new Point(103, 25);
             listBox3.Name = "listBox3";
-            listBox3.Size = new Size(173, 34);
+            listBox3.Size = new Size(173, 79);
             listBox3.TabIndex = 7;
             listBox3.SelectedIndexChanged += listBox3_SelectedIndexChanged;
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(11, 119);
+            label16.Location = new Point(11, 231);
             label16.Name = "label16";
             label16.Size = new Size(55, 15);
             label16.TabIndex = 6;
@@ -868,7 +880,7 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(103, 113);
+            dateTimePicker1.Location = new Point(103, 225);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(173, 23);
             dateTimePicker1.TabIndex = 5;
@@ -877,15 +889,15 @@
             // 
             listBox2.FormattingEnabled = true;
             listBox2.ItemHeight = 15;
-            listBox2.Location = new Point(103, 71);
+            listBox2.Location = new Point(103, 118);
             listBox2.Name = "listBox2";
-            listBox2.Size = new Size(173, 34);
+            listBox2.Size = new Size(173, 79);
             listBox2.TabIndex = 4;
             // 
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(11, 71);
+            label14.Location = new Point(11, 118);
             label14.Name = "label14";
             label14.Size = new Size(49, 15);
             label14.TabIndex = 3;
@@ -1031,5 +1043,6 @@
         private ListBox bookPublisherField;
         private Label label17;
         private Label label12;
+        private ToolStripMenuItem allExpiredBooksToolStripMenuItem;
     }
 }
